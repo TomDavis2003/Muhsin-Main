@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lead Profile - Loan Processing System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        window.currentUser = {{ user|tojson if user else 'null' }};
+        window.leadId = "{{ lead_id }}";
+    </script>
+</head>
+<body>
+    <div id="main-application">
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Sidebar -->
+                <div class="col-md-2 sidebar d-none d-md-block p-0">
+                    <div class="d-flex flex-column p-3">
+                        <ul class="nav nav-pills flex-column mb-auto" id="sidebar-menu">
+                            <li class="nav-item">
+                                <a href="/#dashboard" class="nav-link" data-module="dashboard">
+                                    <i class="fas fa-tachometer-alt"></i> Dashboard
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/#lead-master" class="nav-link" data-module="lead-master">
+                                    <i class="fas fa-users"></i> Lead Master
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/#customer-synopsis" class="nav-link" data-module="customer-synopsis">
+                                    <i class="fas fa-user-tie"></i> Customer Synopsis
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/#bank-details" class="nav-link" data-module="bank-details">
+                                    <i class="fas fa-landmark"></i> Bank Details
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/#legal" class="nav-link" data-module="legal">
+                                    <i class="fas fa-balance-scale"></i> Legal
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/#documents" class="nav-link" data-module="documents">
+                                    <i class="fas fa-file-alt"></i> Documents
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/#task-allocation" class="nav-link" data-module="task-allocation">
+                                    <i class="fas fa-tasks"></i> Task Allocation
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/#reports" class="nav-link" data-module="reports">
+                                    <i class="fas fa-chart-line"></i> Reports
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/#settings" class="nav-link" data-module="settings">
+                                    <i class="fas fa-cog"></i> Settings
+                                </a>
+                            </li>
+                            <li class="nav-item admin-only">
+                                <a href="/#admin" class="nav-link" data-module="admin">
+                                    <i class="fas fa-users-cog"></i> Employee Management
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="mt-auto">
+                            <div class="card bg-light text-dark">
+                                <div class="card-body p-2">
+                                    <h6 class="card-title">TAT Breach Alerts</h6>
+                                    <div class="d-flex justify-content-between">
+                                        <span>Today:</span>
+                                        <span class="badge bg-danger" id="tat-today">0</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between">
+                                        <span>This Week:</span>
+                                        <span class="badge bg-warning" id="tat-week">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Main Content -->
+                <div class="col-md-10 main-content">
+                    <!-- Process Flow Tabs (top) -->
+                    <div class="process-flow mb-4 mt-3">
+                        <ul class="nav nav-pills justify-content-center flex-wrap" id="processFlowTabs">
+                            <li class="nav-item"><a class="nav-link active" data-step="primary-profile" href="#">Primary Profile</a></li>
+                            <li class="nav-item"><a class="nav-link" data-step="secondary-profile" href="#">Secondary Profile</a></li>
+                            <li class="nav-item"><a class="nav-link" data-step="legal-checking" href="#">Legal Checking</a></li>
+                            <li class="nav-item"><a class="nav-link" data-step="financial-analysis" href="#">Financial Analysis</a></li>
+                            <li class="nav-item"><a class="nav-link" data-step="bank-finalization" href="#">Bank Finalization</a></li>
+                            <li class="nav-item"><a class="nav-link" data-step="all-documents" href="#">All Documents</a></li>
+                            <li class="nav-item"><a class="nav-link" data-step="merits" href="#">Merits</a></li>
+                            <li class="nav-item"><a class="nav-link" data-step="demerits" href="#">Demerits</a></li>
+                            <li class="nav-item"><a class="nav-link" data-step="status" href="#">Status</a></li>
+                        </ul>
+                        <div id="lead-profile-content" class="mt-4"></div>
+                        <!-- Dynamically loaded lead details for each step -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/lead_profile.js') }}"></script>
+</body>
+</html>
